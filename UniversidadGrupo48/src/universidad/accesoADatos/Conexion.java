@@ -14,10 +14,6 @@ public class Conexion {
     private static String password = "";
     private static Connection conexion;
 
-    private Conexion() throws ClassNotFoundException {
-        Class.forName("org.mariadb.jdbc.Driver");
-    }
-
     private Conexion(String url, String usuario, String password) {
         this.url = url;
         this.usuario = usuario;
