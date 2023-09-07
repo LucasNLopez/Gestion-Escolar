@@ -30,7 +30,7 @@ public class Conexion {
                 JOptionPane.showMessageDialog(null, "Error "+ex.getMessage());
             }
         }
-        return conexion; //retorna la conexion establecida
+        return conexion; 
     }
 
 }
