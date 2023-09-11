@@ -9,16 +9,12 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
-    private static String url = "jdbc:mariadb://localhost/universidad";
-    private static String usuario = "root";
-    private static String password = "";
+    private static final String url = "jdbc:mariadb://localhost/universidad";
+    private static final String usuario = "root";
+    private static final String password = "";
     private static Connection conexion;
 
-    private Conexion(String url, String usuario, String password) {
-        this.url = url;
-        this.usuario = usuario;
-        this.password = password;
-    }
+    private Conexion() {}
 
     public Connection buscarConexion(){
         if (conexion==null){
