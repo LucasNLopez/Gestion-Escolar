@@ -19,7 +19,7 @@ public class universidadMain {
      */
     public static void main(String[] args) {
         Connection conexion=Conexion.buscarConexion();
-        System.out.println("exito.");
+        System.out.println("Exito.123.");
     }
     
 }
