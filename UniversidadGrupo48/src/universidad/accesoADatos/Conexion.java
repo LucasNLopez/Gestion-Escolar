@@ -16,7 +16,7 @@ public class Conexion {
 
     private Conexion() {}
 
-    public Connection buscarConexion(){
+    public static Connection buscarConexion(){
         if (conexion==null){
             try{
                 //cargamos las clases de mariadb que implementan JDBC
