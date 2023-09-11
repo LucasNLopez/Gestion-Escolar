@@ -5,10 +5,9 @@
  */
 package universidad;
 
-import java.sql.Connection;
+
 import java.time.LocalDate;
 import universidad.accesoADatos.AlumnoData;
-import universidad.accesoADatos.Conexion;
 import universidad.entidades.Alumno;
 
 /**
@@ -21,9 +20,10 @@ public class universidadMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Alumno x=new Alumno(12345678,"Perez","Maria",LocalDate.of(1990, 5, 23),true);
+        //Alumno x=new Alumno(12345678,"Perez","Maria",LocalDate.of(1990, 5, 23),true);
         AlumnoData alu=new AlumnoData();
-        alu.guardarAlumno(x);
+        //alu.guardarAlumno(x);
+        alu.eliminarAlumno(1);
     }
     
 }
