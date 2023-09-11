@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
 import universidad.entidades.Alumno;
@@ -81,5 +83,54 @@ public class AlumnoData {
            JOptionPane.showMessageDialog(null,"Error "+ex.getMessage());
        }
        
+   }
+   
+   public Alumno buscarAlumno(int id){
+       String sql="SELECT dni, apellido, nombre, FechaNacimiento FROM alumno WHERE idAlumno=? AND estado=1";
+       Alumno alumno=null;
+       try {
+           PreparedStatement ps=conexion.prepareStatement(sql);
+           ps.setInt(1, id);
+           ResultSet rs=ps.executeQuery();
+           if(rs.next()){
+               alumno=new Alumno();
+               alumno.setIdAlumno(id);
+               alumno.setDni(rs.getInt("dni"));
+               alumno.setApellido(rs.getString("apellido"));
+               alumno.setNombre(rs.getString("nombre"));
+               alumno.setFechaDeNacimiento(rs.getDate("FechaNacieminto").toLocalDate());
+               alumno.setEstado(true);
+           }else{
+               JOptionPane.showMessageDialog(null,"No existe un alumno con ese id.");
+           }
+           ps.close();
+       } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null,"Error "+ex.getMessage());
+       }
+       return alumno;
+   }
+   public Alumno buscarAlumnoPorDni(int dni){
+       String sql="SELECT idAlumno, dni, apellido, nombre, FechaNacimiento FROM alumno WHERE dni=? AND estado=1";
+       Alumno alumno=null;
+       try {
+           PreparedStatement ps=conexion.prepareStatement(sql);
+           ps.setInt(1, dni);
+           ResultSet rs=ps.executeQuery();
+           if(rs.next()){
+               alumno=new Alumno();
+               alumno.setIdAlumno(rs.getInt("idAlumno"));
+               alumno.setDni(dni);
+               alumno.setApellido(rs.getString("apellido"));
+               alumno.setNombre(rs.getString("nombre"));
+               alumno.setFechaDeNacimiento(rs.getDate("FechaNacieminto").toLocalDate());
+               alumno.setEstado(true);
+           }else{
+               JOptionPane.showMessageDialog(null,"No existe un alumno con ese id.");
+           }
+           ps.close();
+       } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null,"Error "+ex.getMessage());
+       }
+       return alumno;
    }
 }
