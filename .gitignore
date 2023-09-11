@@ -1,7 +1,5 @@
 
-UniversidadGrupo48/nbproject/private/private.properties
-/UniversidadGrupo48/build/
-UniversidadGrupo48/nbproject/private/private.properties
-*.properties
-UniversidadGrupo48/nbproject/project.properties
-*.properties
+UniversidadGrupo48/nbproject/private/
+UniversidadGrupo48/build/
+UniversidadGrupo48/dist/
+UniversidadGrupo48/test/
