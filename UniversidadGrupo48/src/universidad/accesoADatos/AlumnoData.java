@@ -1,11 +1,14 @@
 
 package universidad.accesoADatos;
 
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
 import universidad.entidades.Alumno;
@@ -130,5 +133,30 @@ public class AlumnoData {
            JOptionPane.showMessageDialog(null,"Error "+ex.getMessage());
        }
        return alumno;
+   }
+   
+   public List<Alumno> listarAlumnos(){
+       String sql="SELECT idAlumno, dni, apellido, nombre, FechaNacimiento FROM alumno WHERE estado=1";
+       ArrayList<Alumno> alumnos=new ArrayList<>();
+       try {
+           PreparedStatement ps=conexion.prepareStatement(sql);
+           
+           ResultSet rs=ps.executeQuery();
+           while(rs.next()){
+               Alumno alumno=new Alumno();
+               alumno.setIdAlumno(rs.getInt("idAlumno"));
+               alumno.setDni(rs.getInt("dni"));
+               alumno.setApellido(rs.getString("apellido"));
+               alumno.setNombre(rs.getString("nombre"));
+               alumno.setFechaDeNacimiento(rs.getDate("FechaNacieminto").toLocalDate());
+               alumno.setEstado(true);
+               
+               alumnos.add(alumno);
+           }
+           ps.close();
+       } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null,"Error "+ex.getMessage());
+       }
+       return alumnos;
    }
 }
