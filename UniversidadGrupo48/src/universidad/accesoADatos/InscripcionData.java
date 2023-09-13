@@ -48,7 +48,6 @@ public class InscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
         }
-        
     }
     
     public List<Inscripcion> obtenerInscripciones(){
@@ -205,7 +204,6 @@ public class InscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
         }
-        
         return alumnos;
     }
 }
