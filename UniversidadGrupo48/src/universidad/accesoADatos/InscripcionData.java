@@ -15,7 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
+import universidad.entidades.Alumno;
 import universidad.entidades.Inscripcion;
+import universidad.entidades.Materia;
 
 /**
  *
@@ -97,5 +99,115 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
         }
         return incripciones;
+    }
+    
+    public List<Materia> obtenerMateriasCursadas(int id){
+        List<Materia> materias=new ArrayList<>();
+        
+        String sql="SELECT inscripcion.idMateria, nombre, año "
+                + "FROM inscripcion JOIN materia ON (inscripcion.idMateria=materia.idMateria)"
+                + "WHERE inscripcion.idAlumno = ?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Materia materia=new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnioMateria(rs.getInt("año"));
+                materias.add(materia);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        }
+        return materias;
+    }
+    
+    public List<Materia> obtenerMateriasNoCursadas(int id){
+        List<Materia> materias=new ArrayList<>();
+        
+        String sql="SELECT inscripcion.idMateria, nombre, año "
+                + "FROM inscripcion JOIN materia ON (inscripcion.idMateria=materia.idMateria)"
+                + "WHERE inscripcion.idAlumno != ?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Materia materia=new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnioMateria(rs.getInt("año"));
+                materias.add(materia);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        }
+        return materias;
+    }
+    
+    public void borrarInscripcionMateriaAlumno(int idAlumno,int idMateria){
+        String sql="DELETE FROM inscripcion WHERE idAlumno=? AND idMateria=?";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            
+           int exito=ps.executeUpdate();
+           
+           if(exito==1){
+               JOptionPane.showMessageDialog(null,"Inscripcion Eliminada.");
+           }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        }
+    }
+    
+    public void actualizarNota(int idAlumno, int idMateria, int nota){
+        String sql="UPDATE inscripcion SET nota=? WHERE idAlumno=? AND idMateria=?";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
+            
+           int exito=ps.executeUpdate();
+           
+           if(exito==1){
+               JOptionPane.showMessageDialog(null,"Nota Actualizada.");
+           }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        }
+    }
+    
+    public List<Alumno> obtenerAlumnosXMateria(int idMateria){
+        List<Alumno> alumnos=new ArrayList<>();
+        AlumnoData ad=new AlumnoData();
+        String sql="SELECT idAlumno FROM inscripcion WHERE idMateria=?";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idMateria);
+            
+            ResultSet rs=ps.executeQuery();
+            
+            while(rs.next()){
+                Alumno alumno=ad.buscarAlumno(rs.getInt("idAlumno"));
+                alumnos.add(alumno);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        }
+        
+        return alumnos;
     }
 }
