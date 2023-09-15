@@ -5,7 +5,7 @@
  */
 package universidad.vistas;
 
-import java.net.URL;
+import java.awt.Color;
 
 /**
  *
@@ -18,6 +18,7 @@ public class Alumno extends javax.swing.JFrame {
      */
     public Alumno() {
         initComponents();
+        getContentPane().setBackground(Color.WHITE);
     }
 
        
@@ -166,6 +167,9 @@ public class Alumno extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/Image20230914194710.png"))); // NOI18N
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 255, 51));
         jLabel2.setText("3N3M");
