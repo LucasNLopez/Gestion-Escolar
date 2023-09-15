@@ -55,6 +55,7 @@ public class Alumno extends javax.swing.JFrame {
         jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\lucas\\Desktop\\PROYECTO-GRUPO48\\Arg.Pro.-Proyecto-Grupo48\\UniversidadGrupo48\\src\\universidad\\imagenes\\alumnos\\agregar.png")); // NOI18N
         jButton5.setText("    AGREGAR");
         jButton5.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 255, 102), new java.awt.Color(51, 102, 0)));
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton5.setSelectedIcon(new javax.swing.ImageIcon("C:\\Users\\lucas\\Desktop\\PROYECTO-GRUPO48\\Arg.Pro.-Proyecto-Grupo48\\UniversidadGrupo48\\src\\universidad\\imagenes\\alumnos\\agregar.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -79,7 +80,7 @@ public class Alumno extends javax.swing.JFrame {
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\lucas\\Desktop\\PROYECTO-GRUPO48\\Arg.Pro.-Proyecto-Grupo48\\UniversidadGrupo48\\src\\universidad\\imagenes\\alumnos\\edit.png")); // NOI18N
         jButton4.setText("    MODIFICAR");
         jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 204, 255), new java.awt.Color(0, 51, 102)));
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.SW_RESIZE_CURSOR));
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.setSelectedIcon(new javax.swing.ImageIcon("C:\\Users\\lucas\\Desktop\\PROYECTO-GRUPO48\\Arg.Pro.-Proyecto-Grupo48\\UniversidadGrupo48\\src\\universidad\\imagenes\\alumnos\\edit.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
