@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package universidad.accesoADatos;
+package accesoADatos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
-import universidad.entidades.Alumno;
-import universidad.entidades.Inscripcion;
-import universidad.entidades.Materia;
+import entidades.Alumno;
+import entidades.Inscripcion;
+import entidades.Materia;
 
 /**
  *
