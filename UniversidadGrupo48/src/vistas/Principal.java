@@ -12,7 +12,7 @@ import javax.swing.SwingUtilities;
 
 /**
  **
- * @author Matias
+ * @author 3N3M
  */
 public class Principal extends javax.swing.JFrame {
 
