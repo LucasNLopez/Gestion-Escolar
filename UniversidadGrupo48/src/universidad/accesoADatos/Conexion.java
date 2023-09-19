@@ -1,5 +1,5 @@
 
-package accesoADatos;
+package universidad.accesoADatos;
 
 
 import java.sql.Connection;

@@ -1,5 +1,5 @@
 
-package accesoADatos;
+package universidad.accesoADatos;
 
 
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
-import entidades.Alumno;
+import universidad.entidades.Alumno;
 
 
 public class AlumnoData {
