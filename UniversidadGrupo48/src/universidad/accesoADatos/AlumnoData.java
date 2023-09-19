@@ -111,7 +111,7 @@ public class AlumnoData {
        return alumno;
    }
    public Alumno buscarAlumnoPorDni(int dni){
-       String sql="SELECT idAlumno, dni, apellido, nombre, FechaNacimiento FROM alumno WHERE dni=? AND estado=1";
+       String sql="SELECT idAlumno, dni, apellido, nombre, FechaNacimiento, estado FROM alumno WHERE dni=?";
        Alumno alumno=null;
        try {
            PreparedStatement ps=conexion.prepareStatement(sql);
@@ -123,14 +123,15 @@ public class AlumnoData {
                alumno.setDni(dni);
                alumno.setApellido(rs.getString("apellido"));
                alumno.setNombre(rs.getString("nombre"));
-               alumno.setFechaDeNacimiento(rs.getDate("FechaNacieminto").toLocalDate());
-               alumno.setEstado(true);
+               alumno.setFechaDeNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
+               alumno.setEstado(rs.getBoolean("estado"));
            }else{
                JOptionPane.showMessageDialog(null,"No existe un alumno con ese dni.");
            }
            ps.close();
        } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null,"Error "+ex.getMessage());
+           System.out.println(ex.getMessage());
        }
        return alumno;
    }
