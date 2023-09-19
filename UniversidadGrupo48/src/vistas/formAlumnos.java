@@ -272,7 +272,16 @@ public class formAlumnos extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+        try {
+            Alumno alumno = ad.buscarAlumnoPorDni(Integer.valueOf(textDni.getText()));
+            if (alumno.isEstado()) {
+                ad.eliminarAlumno(alumno.getIdAlumno());
+            } else {
+                JOptionPane.showMessageDialog(null, "Ese alumno ya estaba dado de baja.");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
