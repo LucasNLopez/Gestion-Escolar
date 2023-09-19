@@ -126,7 +126,7 @@ public class AlumnoData {
                alumno.setFechaDeNacimiento(rs.getDate("FechaNacieminto").toLocalDate());
                alumno.setEstado(true);
            }else{
-               JOptionPane.showMessageDialog(null,"No existe un alumno con ese id.");
+               JOptionPane.showMessageDialog(null,"No existe un alumno con ese dni.");
            }
            ps.close();
        } catch (SQLException ex) {
