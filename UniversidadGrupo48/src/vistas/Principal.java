@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
 /**
- *
+ **
  * @author Matias
  */
 public class Principal extends javax.swing.JFrame {
