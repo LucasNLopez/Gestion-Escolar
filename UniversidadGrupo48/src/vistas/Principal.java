@@ -16,9 +16,7 @@ import javax.swing.SwingUtilities;
  */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
+    
     formAlumnos falumnos=new formAlumnos();
     formMateria fmateria=new formMateria();
     formInscripciones finscrip=new formInscripciones();

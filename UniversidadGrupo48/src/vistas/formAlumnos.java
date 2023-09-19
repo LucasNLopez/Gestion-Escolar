@@ -6,7 +6,9 @@
 package vistas;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidad.accesoADatos.AlumnoData;
 import universidad.entidades.Alumno;
@@ -20,8 +22,8 @@ public class formAlumnos extends javax.swing.JPanel {
     /**
      * Creates new form formAlumnos
      */
-    AlumnoData ad=new AlumnoData();
-    
+    AlumnoData ad = new AlumnoData();
+
     public formAlumnos() {
         initComponents();
     }
@@ -93,10 +95,25 @@ public class formAlumnos extends javax.swing.JPanel {
         });
 
         jButton2.setText("Nuevo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Salir");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -202,27 +219,61 @@ public class formAlumnos extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         Principal.jpEscritorio.removeAll();
+        textDni.setText("");
+        textApellido.setText("");
+        textNombre.setText("");
+        rbEstado.setSelected(false);
+        fechaNacimiento.setDate(null);
         Principal.jpEscritorio.repaint();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(textDni.getText().equals("")){
+        if (textDni.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un dni para buscar.");
-        }else{
-            try{
-                Alumno alumno=ad.buscarAlumnoPorDni(Integer.valueOf(textDni.getText()));
+        } else {
+            try {
+                Alumno alumno = ad.buscarAlumnoPorDni(Integer.valueOf(textDni.getText()));
                 textApellido.setText(alumno.getApellido());
                 textNombre.setText(alumno.getNombre());
                 rbEstado.setSelected(alumno.isEstado());
                 fechaNacimiento.setDate(Date.valueOf(alumno.getFechaDeNacimiento()));
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 textDni.setText("");
-                JOptionPane.showMessageDialog(null, "Debe ingresar un dni para buscar.");
+                JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+                System.out.println(ex.getMessage());
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            Alumno alumno = new Alumno(Integer.valueOf(textDni.getText()), textApellido.getText(), textNombre.getText(), fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), rbEstado.isSelected());
+            ad.guardarAlumno(alumno);
+            textDni.setText("");
+            textApellido.setText("");
+            textNombre.setText("");
+            rbEstado.setSelected(false);
+            fechaNacimiento.setDate(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        }
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        textDni.setText("");
+        textApellido.setText("");
+        textNombre.setText("");
+        rbEstado.setSelected(false);
+        fechaNacimiento.setDate(null);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
