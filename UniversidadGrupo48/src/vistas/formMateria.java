@@ -222,9 +222,10 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfCodigoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            if(jtfCodigo.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Debe ingresar el código de la materia");
-            }else {try {
+        if (jtfCodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar el código de la materia");
+        } else {
+            try {
                 Materia materia = mat.buscarCualquierMateria(Integer.valueOf(jtfCodigo.getText()));
                 jtfmateriaNombre.setText(materia.getNombre());
                 materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
@@ -236,23 +237,27 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       jtfCodigo.setText("");
-       jtfmateriaNombre.setText("");
-       materiaAnio.setText("");
-       jrActivo.setSelected(false);
+        jtfCodigo.setText("");
+        jtfmateriaNombre.setText("");
+        materiaAnio.setText("");
+        jrActivo.setSelected(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try{
-            Materia materia = new Materia(jtfmateriaNombre.getText(),Integer.getInteger(materiaAnio.getText()),jrActivo.isSelected());
+        try {
+            Materia materia = new Materia(jtfmateriaNombre.getText(), Integer.parseInt(materiaAnio.getText()), jrActivo.isSelected());
             mat.guardarMateria(materia);
             jtfCodigo.setText("");
             jtfmateriaNombre.setText("");
             materiaAnio.setText("");
             jrActivo.setSelected(false);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
+        jtfCodigo.setText("");
+        jtfmateriaNombre.setText("");
+        materiaAnio.setText("");
+        jrActivo.setSelected(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
