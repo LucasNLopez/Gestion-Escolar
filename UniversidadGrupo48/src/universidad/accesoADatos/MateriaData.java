@@ -52,7 +52,7 @@ public class MateriaData {
     }
 
     public Materia buscarMateria(int id) {
-        String sql = "SELECT nombre, año FROM materia WHERE idMateria=? AND estado=1";
+        String sql = "SELECT nombre, año FROM materia WHERE idMateria=?";
         Materia materia = null;
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -75,21 +75,21 @@ public class MateriaData {
     }
 
     //Este metodo buscaria materias anque esten dadas de baja. Por si hubiera un usuario que lo necesitara.
-    public Materia buscarCualquierMateria(int id) {
-        String sql = "SELECT nombre, año, estado FROM materia WHERE idMateria=?";
+    public Materia buscarCualquierMateria(String name) {
+        String sql = "SELECT idMateria , año, estado FROM materia WHERE nombre=?";
         Materia materia = null;
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 materia = new Materia();
-                materia.setIdMateria(id);
-                materia.setNombre(rs.getString("nombre"));
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(name);
                 materia.setAnioMateria(rs.getInt("año"));
                 materia.setEstado(rs.getBoolean("estado"));
             } else {
-                JOptionPane.showMessageDialog(null, "No existe una materia con ese id.");
+                JOptionPane.showMessageDialog(null, "No existe una materia con ese nombre");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -98,8 +98,8 @@ public class MateriaData {
         return materia;
     }
 
-    public void modificarMateria(Materia materia) {
-
+    public void modificarMateria(Materia materia,int id) {
+        
         String sql = "UPDATE materia SET nombre=?, año=?, estado=? "
                 + "WHERE idMateria=?";
 
@@ -108,6 +108,7 @@ public class MateriaData {
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnioMateria());
             ps.setBoolean(3, materia.isEstado());
+            ps.setInt(4, id);
 
             int exito = ps.executeUpdate();
             if (exito == 1) {

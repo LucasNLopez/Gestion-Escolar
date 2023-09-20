@@ -19,6 +19,7 @@ public class formMateria extends javax.swing.JPanel {
      * Creates new form formAlumnos
      */
     MateriaData mat = new MateriaData();
+    Materia mat1 = new Materia();
 
     public formMateria() {
         initComponents();
@@ -108,6 +109,11 @@ public class formMateria extends javax.swing.JPanel {
         });
 
         jButton6.setText("Modificar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -222,12 +228,19 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfCodigoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jtfCodigo.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar el código de la materia");
-        } else {
+        if (!jtfCodigo.getText().equals("")) {
             try {
-                Materia materia = mat.buscarCualquierMateria(Integer.valueOf(jtfCodigo.getText()));
+                Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
                 jtfmateriaNombre.setText(materia.getNombre());
+                materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
+                jrActivo.setSelected(materia.isEstado());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.fillInStackTrace());
+            }
+        } else if (!jtfmateriaNombre.getText().equals("")) {
+            try {
+                Materia materia = mat.buscarCualquierMateria(jtfmateriaNombre.getText());
+                jtfCodigo.setText(String.valueOf(materia.getIdMateria()));
                 materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
                 jrActivo.setSelected(materia.isEstado());
             } catch (Exception ex) {
@@ -244,21 +257,39 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        mat1 = mat.buscarCualquierMateria(jtfmateriaNombre.getText());
         try {
+            if (mat1.equals("")) {
+                Materia materia = new Materia(jtfmateriaNombre.getText(), Integer.parseInt(materiaAnio.getText()), jrActivo.isSelected());
+                mat.guardarMateria(materia);
+                jtfCodigo.setText("");
+                jtfmateriaNombre.setText("");
+                materiaAnio.setText("");
+                jrActivo.setSelected(false);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "La materia ya existe");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        try {
+
             Materia materia = new Materia(jtfmateriaNombre.getText(), Integer.parseInt(materiaAnio.getText()), jrActivo.isSelected());
-            mat.guardarMateria(materia);
+            mat.modificarMateria(materia,Integer.parseInt(jtfCodigo.getText()));
             jtfCodigo.setText("");
             jtfmateriaNombre.setText("");
             materiaAnio.setText("");
             jrActivo.setSelected(false);
+
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Para modificar una materia, es necesario el ID");
         }
-        jtfCodigo.setText("");
-        jtfmateriaNombre.setText("");
-        materiaAnio.setText("");
-        jrActivo.setSelected(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
