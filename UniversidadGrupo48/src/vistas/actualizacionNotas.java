@@ -5,17 +5,19 @@
  */
 package vistas;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Matias
  */
 public class actualizacionNotas extends javax.swing.JPanel {
 
-    /**
-     * Creates new form formAlumnos
-     */
+    private DefaultTableModel modelo=new DefaultTableModel();
+    
     public actualizacionNotas() {
         initComponents();
+        armarCabecera();
     }
 
     /**
@@ -33,7 +35,7 @@ public class actualizacionNotas extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaNotas = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
 
@@ -52,7 +54,7 @@ public class actualizacionNotas extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,7 +65,7 @@ public class actualizacionNotas extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaNotas);
 
         jButton6.setText("Guardar");
 
@@ -139,6 +141,7 @@ public class actualizacionNotas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaNotas;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -147,6 +150,12 @@ public class actualizacionNotas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera(){
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Nota");
+        TablaNotas.setModel(modelo);
+    }
 }

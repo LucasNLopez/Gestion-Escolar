@@ -5,17 +5,22 @@
  */
 package vistas;
 
+import javax.swing.table.DefaultTableModel;
+import universidad.accesoADatos.MateriaData;
+import universidad.entidades.Materia;
+
 /**
  *
  * @author Matias
  */
 public class alumnosXMateria extends javax.swing.JPanel {
 
-    /**
-     * Creates new form formAlumnos
-     */
+    private DefaultTableModel modelo=new DefaultTableModel();
+    private MateriaData md=new MateriaData();
+    
     public alumnosXMateria() {
         initComponents();
+        armarCabecera();
     }
 
     /**
@@ -31,9 +36,9 @@ public class alumnosXMateria extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboMaterias = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaAluxMat = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -49,9 +54,7 @@ public class alumnosXMateria extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccione una Materia:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaAluxMat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,7 +65,7 @@ public class alumnosXMateria extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaAluxMat);
 
         jButton7.setText("Salir");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +91,7 @@ public class alumnosXMateria extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(41, 41, 41)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jComboMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(427, 427, 427)
                                 .addComponent(jButton7))
@@ -107,7 +110,7 @@ public class alumnosXMateria extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -134,13 +137,28 @@ public class alumnosXMateria extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaAluxMat;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Materia> jComboMaterias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    
+    private void cargarCombo(){
+        
+        Materia materia=new Materia();
+        
+        jComboMaterias.addItem(materia);
+    }
+    
+    private void armarCabecera(){
+        modelo.addColumn("ID");
+        modelo.addColumn("DNI");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        TablaAluxMat.setModel(modelo);
+    }
 }
