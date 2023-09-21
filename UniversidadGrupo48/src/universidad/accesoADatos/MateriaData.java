@@ -88,8 +88,6 @@ public class MateriaData {
                 materia.setNombre(name);
                 materia.setAnioMateria(rs.getInt("año"));
                 materia.setEstado(rs.getBoolean("estado"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe una materia con ese nombre");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -98,8 +96,8 @@ public class MateriaData {
         return materia;
     }
 
-    public void modificarMateria(Materia materia,int id) {
-        
+    public void modificarMateria(Materia materia, int id) {
+
         String sql = "UPDATE materia SET nombre=?, año=?, estado=? "
                 + "WHERE idMateria=?";
 
@@ -134,27 +132,27 @@ public class MateriaData {
             JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
         }
     }
-    
-    public List<Materia> listarMaterias(){
-        String sql="SELECT * FROM materia WHERE estado=1";
-        ArrayList<Materia> materias=new ArrayList<>();
-        
+
+    public List<Materia> listarMaterias() {
+        String sql = "SELECT * FROM materia WHERE estado=1";
+        ArrayList<Materia> materias = new ArrayList<>();
+
         try {
-            PreparedStatement ps=conexion.prepareStatement(sql);
-            
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
-                Materia materia=new Materia();
+            PreparedStatement ps = conexion.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia materia = new Materia();
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("año"));
                 materia.setEstado(true);
-                
+
                 materias.add(materia);
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
         }
-       return materias;
+        return materias;
     }
 }

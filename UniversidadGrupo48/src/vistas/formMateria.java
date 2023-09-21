@@ -240,7 +240,7 @@ public class formMateria extends javax.swing.JPanel {
                 materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
                 jrActivo.setSelected(materia.isEstado());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.fillInStackTrace());
+                JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         } else if (!jtfmateriaNombre.getText().equals("")) {
             try {
@@ -249,7 +249,7 @@ public class formMateria extends javax.swing.JPanel {
                 materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
                 jrActivo.setSelected(materia.isEstado());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.fillInStackTrace());
+                JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -262,19 +262,16 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        mat1 = mat.buscarCualquierMateria(jtfmateriaNombre.getText());
-        try {
-            if (mat1.equals("")) {
-                Materia materia = new Materia(jtfmateriaNombre.getText(), Integer.parseInt(materiaAnio.getText()), jrActivo.isSelected());
-                mat.guardarMateria(materia);
-                jtfCodigo.setText("");
-                jtfmateriaNombre.setText("");
-                materiaAnio.setText("");
-                jrActivo.setSelected(false);
 
-            } else {
-                JOptionPane.showMessageDialog(this, "La materia ya existe");
-            }
+        try {
+
+            Materia materia = new Materia(jtfmateriaNombre.getText(), Integer.parseInt(materiaAnio.getText()), jrActivo.isSelected());
+            mat.guardarMateria(materia);
+            jtfCodigo.setText("");
+            jtfmateriaNombre.setText("");
+            materiaAnio.setText("");
+            jrActivo.setSelected(false);
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
         }
@@ -285,7 +282,7 @@ public class formMateria extends javax.swing.JPanel {
         try {
 
             Materia materia = new Materia(jtfmateriaNombre.getText(), Integer.parseInt(materiaAnio.getText()), jrActivo.isSelected());
-            mat.modificarMateria(materia,Integer.parseInt(jtfCodigo.getText()));
+            mat.modificarMateria(materia, Integer.parseInt(jtfCodigo.getText()));
             jtfCodigo.setText("");
             jtfmateriaNombre.setText("");
             materiaAnio.setText("");
@@ -297,14 +294,14 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try{
+        try {
             Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
-            if(materia.isEstado()){
+            if (materia.isEstado()) {
                 mat.eliminarMateria(materia.getIdMateria());
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Materia inactiva");
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
