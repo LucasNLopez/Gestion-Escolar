@@ -5,8 +5,12 @@
  */
 package vistas;
 
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import universidad.accesoADatos.InscripcionData;
 import universidad.accesoADatos.MateriaData;
+import universidad.entidades.Alumno;
 import universidad.entidades.Materia;
 
 /**
@@ -15,12 +19,19 @@ import universidad.entidades.Materia;
  */
 public class alumnosXMateria extends javax.swing.JPanel {
 
-    private DefaultTableModel modelo=new DefaultTableModel();
-    private MateriaData md=new MateriaData();
-    
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
+    private MateriaData md = new MateriaData();
+    private InscripcionData iD = new InscripcionData();
+
     public alumnosXMateria() {
         initComponents();
         armarCabecera();
+        cargarCombo();
     }
 
     /**
@@ -53,6 +64,12 @@ public class alumnosXMateria extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccione una Materia:");
+
+        jComboMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboMateriasActionPerformed(evt);
+            }
+        });
 
         TablaAluxMat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,6 +152,21 @@ public class alumnosXMateria extends javax.swing.JPanel {
         Principal.jpEscritorio.repaint();
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jComboMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboMateriasActionPerformed
+        try {
+            borrarFilas();
+            Materia materia = (Materia) jComboMaterias.getSelectedItem();
+
+            List<Alumno> listaAlumnos = iD.obtenerAlumnosXMateria(materia.getIdMateria());
+
+            for (Alumno alumno : listaAlumnos) {
+                cargarDatos(alumno);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jComboMateriasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaAluxMat;
@@ -146,19 +178,33 @@ public class alumnosXMateria extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
-    
-    private void cargarCombo(){
-        
-        Materia materia=new Materia();
-        
-        jComboMaterias.addItem(materia);
+
+    private void cargarCombo() {
+        List<Materia> listaMaterias = md.listarMaterias();
+
+        for (Materia materia : listaMaterias) {
+            jComboMaterias.addItem(materia);
+        }
+
     }
-    
-    private void armarCabecera(){
+
+    private void armarCabecera() {
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
         TablaAluxMat.setModel(modelo);
+    }
+
+    private void cargarDatos(Alumno alumno) {
+        modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
+    }
+
+    private void borrarFilas() {
+        int filas = TablaAluxMat.getRowCount() - 1;
+
+        for (int i = filas; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
     }
 }

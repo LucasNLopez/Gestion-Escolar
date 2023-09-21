@@ -99,7 +99,7 @@ public class AlumnoData {
                alumno.setDni(rs.getInt("dni"));
                alumno.setApellido(rs.getString("apellido"));
                alumno.setNombre(rs.getString("nombre"));
-               alumno.setFechaDeNacimiento(rs.getDate("FechaNacieminto").toLocalDate());
+               alumno.setFechaDeNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
                alumno.setEstado(true);
            }else{
                JOptionPane.showMessageDialog(null,"No existe un alumno con ese id.");
@@ -149,7 +149,7 @@ public class AlumnoData {
                alumno.setDni(rs.getInt("dni"));
                alumno.setApellido(rs.getString("apellido"));
                alumno.setNombre(rs.getString("nombre"));
-               alumno.setFechaDeNacimiento(rs.getDate("FechaNacieminto").toLocalDate());
+               alumno.setFechaDeNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
                alumno.setEstado(true);
                
                alumnos.add(alumno);
