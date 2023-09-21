@@ -93,6 +93,11 @@ public class formMateria extends javax.swing.JPanel {
         });
 
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Guardar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -290,6 +295,19 @@ public class formMateria extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Para modificar una materia, es necesario el ID");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try{
+            Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
+            if(materia.isEstado()){
+                mat.eliminarMateria(materia.getIdMateria());
+            }else{
+                JOptionPane.showMessageDialog(this, "Materia inactiva");
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
