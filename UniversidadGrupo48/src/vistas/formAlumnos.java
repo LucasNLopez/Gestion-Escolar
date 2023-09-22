@@ -6,8 +6,6 @@
 package vistas;
 
 import java.sql.Date;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidad.accesoADatos.AlumnoData;
@@ -237,10 +235,13 @@ public class formAlumnos extends javax.swing.JPanel {
                 textNombre.setText(alumno.getNombre());
                 rbEstado.setSelected(alumno.isEstado());
                 fechaNacimiento.setDate(Date.valueOf(alumno.getFechaDeNacimiento()));
+            } catch (NumberFormatException ex) {
+                textDni.setText("");
+                JOptionPane.showMessageDialog(null, "El DNI debe ser un número válido.");
+
             } catch (Exception ex) {
                 textDni.setText("");
                 JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
-                System.out.println(ex.getMessage());
             }
 
         }
@@ -249,16 +250,38 @@ public class formAlumnos extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
-            Alumno alumno = new Alumno(Integer.valueOf(textDni.getText()), textApellido.getText(), textNombre.getText(), fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), rbEstado.isSelected());
-            ad.guardarAlumno(alumno);
-            textDni.setText("");
-            textApellido.setText("");
-            textNombre.setText("");
-            rbEstado.setSelected(false);
-            fechaNacimiento.setDate(null);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        String dniText = textDni.getText().trim();
+        String apellido = textApellido.getText().trim();
+        String nombre = textNombre.getText().trim();
+
+        if (dniText.isEmpty() || !dniText.matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un DNI válido (solo números).");
+            return;
         }
+
+        if (apellido.isEmpty() || !apellido.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un apellido válido (solo letras).");
+            return;
+        }
+
+        if (nombre.isEmpty() || !nombre.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un nombre válido (solo letras).");
+            return;
+        }
+
+        // Si todos los datos son válidos, crear un objeto Alumno y guardarlo
+        Alumno alumno = new Alumno(Integer.valueOf(dniText), apellido, nombre, fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), rbEstado.isSelected());
+        ad.guardarAlumno(alumno);
+        
+        // Limpiar los campos después de guardar
+        textDni.setText("");
+        textApellido.setText("");
+        textNombre.setText("");
+        rbEstado.setSelected(false);
+        fechaNacimiento.setDate(null);
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+    }
 
 
     }//GEN-LAST:event_jButton4ActionPerformed
