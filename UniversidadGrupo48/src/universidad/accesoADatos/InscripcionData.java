@@ -31,8 +31,7 @@ public class InscripcionData {
     }
     
     public void guardarInscripcion(Inscripcion inscripcion){
-        String sql="INSERT INTO inscripcion idAlumno, idMateria "
-                + "VALUES ?,?";
+        String sql="INSERT INTO inscripcion(idAlumno, idMateria) VALUES (?,?)";
         try {
             PreparedStatement ps=conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, inscripcion.getAlumno().getIdAlumno());
@@ -126,9 +125,8 @@ public class InscripcionData {
     public List<Materia> obtenerMateriasNoCursadas(int id){
         List<Materia> materias=new ArrayList<>();
         
-        String sql="SELECT inscripcion.idMateria, nombre, año "
-                + "FROM inscripcion JOIN materia ON (inscripcion.idMateria=materia.idMateria)"
-                + "WHERE inscripcion.idAlumno != ?";
+        String sql="SELECT idMateria, nombre, año FROM materia WHERE estado=1 AND idMateria not in "
+                + "(SELECT idMateria FROM inscripcion WHERE idAlumno=?)";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
