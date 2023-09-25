@@ -17,11 +17,11 @@ import javax.swing.SwingUtilities;
 public class Principal extends javax.swing.JFrame {
 
     
-    formAlumnos falumnos=new formAlumnos();
-    formMateria fmateria=new formMateria();
-    formInscripciones finscrip=new formInscripciones();
-    actualizacionNotas anotas=new actualizacionNotas();
-    alumnosXMateria aluXmat=new alumnosXMateria();
+    formAlumnos falumnos;
+    formMateria fmateria;
+    formInscripciones finscrip;
+    actualizacionNotas anotas;
+    alumnosXMateria aluXmat;
     
     CardLayout vista;
     
@@ -239,6 +239,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jpEscritorio.removeAll();
+        falumnos=new formAlumnos();
         jpEscritorio.add(falumnos,"alumnos");
         vista.show(jpEscritorio, "alunnos");
         SwingUtilities.updateComponentTreeUI(this);
@@ -247,6 +248,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jpEscritorio.removeAll();
+        fmateria=new formMateria();
         jpEscritorio.add(fmateria,"materias");
         vista.show(jpEscritorio, "materias");
         SwingUtilities.updateComponentTreeUI(this);
@@ -255,6 +257,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jpEscritorio.removeAll();
+        finscrip=new formInscripciones();
         jpEscritorio.add(finscrip,"inscripcion");
         vista.show(jpEscritorio, "inscripcion");
         SwingUtilities.updateComponentTreeUI(this);
@@ -263,6 +266,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jpEscritorio.removeAll();
+        anotas=new actualizacionNotas();
         jpEscritorio.add(anotas,"notas");
         vista.show(jpEscritorio, "notas");
         SwingUtilities.updateComponentTreeUI(this);
@@ -271,6 +275,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         jpEscritorio.removeAll();
+        aluXmat=new alumnosXMateria();
         jpEscritorio.add(aluXmat,"aluxmat");
         vista.show(jpEscritorio, "aluxmat");
         SwingUtilities.updateComponentTreeUI(this);

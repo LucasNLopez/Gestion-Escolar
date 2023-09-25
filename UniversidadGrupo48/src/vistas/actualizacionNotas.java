@@ -5,7 +5,14 @@
  */
 package vistas;
 
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import universidad.accesoADatos.AlumnoData;
+import universidad.accesoADatos.InscripcionData;
+import universidad.entidades.Alumno;
+import universidad.entidades.Inscripcion;
+import universidad.entidades.Materia;
 
 /**
  *
@@ -13,11 +20,25 @@ import javax.swing.table.DefaultTableModel;
  */
 public class actualizacionNotas extends javax.swing.JPanel {
 
-    private DefaultTableModel modelo=new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            if(columna==2){
+                return true;
+            }
+            return false;
+        }
+        };
+    private AlumnoData ad;
+    private InscripcionData iData;
     
     public actualizacionNotas() {
         initComponents();
+        ad=new AlumnoData();
+        iData=new InscripcionData();
+        cargarCombo();
         armarCabecera();
+        
     }
 
     /**
@@ -52,7 +73,11 @@ public class actualizacionNotas extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccione alumno:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         TablaNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,12 +164,27 @@ public class actualizacionNotas extends javax.swing.JPanel {
         Principal.jpEscritorio.repaint();
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        try {
+            borrarFilas();
+            Alumno alumno = (Alumno) jComboBox1.getSelectedItem();
+
+            List<Inscripcion> listaInscripciones = iData.obtenerInscripcionesPorAlumno(alumno.getIdAlumno());
+
+            for (Inscripcion i : listaInscripciones) {
+                cargarDatos(i);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaNotas;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Alumno> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -153,9 +193,30 @@ public class actualizacionNotas extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void armarCabecera(){
-        modelo.addColumn("Codigo");
+        modelo.addColumn("ID");
         modelo.addColumn("Nombre");
+        modelo.addColumn("Año");
         modelo.addColumn("Nota");
         TablaNotas.setModel(modelo);
+    }
+    private void cargarCombo() {
+        List<Alumno> listaAlumnos = ad.listarAlumnos();
+
+        for (Alumno alumno : listaAlumnos) {
+            jComboBox1.addItem(alumno);
+        }
+
+    }
+
+    private void cargarDatos(Inscripcion inscripcion) {
+        modelo.addRow(new Object[]{inscripcion.getMateria().getIdMateria(), inscripcion.getMateria().getNombre(), inscripcion.getMateria().getAnioMateria(), inscripcion.getNota() });
+    }
+
+    private void borrarFilas() {
+        int filas = TablaNotas.getRowCount() - 1;
+
+        for (int i = filas; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
     }
 }

@@ -19,12 +19,7 @@ import universidad.entidades.Materia;
  */
 public class alumnosXMateria extends javax.swing.JPanel {
 
-    private DefaultTableModel modelo = new DefaultTableModel() {
-        @Override
-        public boolean isCellEditable(int fila, int columna) {
-            return false;
-        }
-    };
+    private DefaultTableModel modelo;
     private MateriaData md = new MateriaData();
     private InscripcionData iD = new InscripcionData();
 
@@ -32,6 +27,12 @@ public class alumnosXMateria extends javax.swing.JPanel {
         initComponents();
         armarCabecera();
         cargarCombo();
+        modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+        };
     }
 
     /**

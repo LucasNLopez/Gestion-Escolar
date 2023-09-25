@@ -74,8 +74,8 @@ public class InscripcionData {
     }
     
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int id){
-        String sql="SELECT idIncripto,nota,idMateria FROM incripcion WHERE idAlumno=?";
-        List<Inscripcion> incripciones=new ArrayList<>();
+        String sql="SELECT idInscripto,nota,idMateria FROM inscripcion WHERE idAlumno=?";
+        List<Inscripcion> inscripciones=new ArrayList<>();
         try {
             PreparedStatement ps=conexion.prepareStatement(sql);
             ps.setInt(1, id);
@@ -88,13 +88,13 @@ public class InscripcionData {
                 inscripcion.setNota(rs.getInt("nota"));
                 inscripcion.setAlumno(ad.buscarAlumno(rs.getInt("idAlumno")));
                 inscripcion.setMateria(md.buscarMateria(rs.getInt("idMateria")));
-                incripciones.add(inscripcion);
+                inscripciones.add(inscripcion);
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
         }
-        return incripciones;
+        return inscripciones;
     }
     
     public List<Materia> obtenerMateriasCursadas(int id){
