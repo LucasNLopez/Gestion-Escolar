@@ -238,20 +238,24 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfCodigoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            if (!jtfCodigo.getText().equals("")) {
+        if (jtfCodigo.getText().equals("") && (jtfmateriaNombre.getText().equals(""))) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un codigo o un nombre de la materia");;
+        } else {
+            try {
                 Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
                 jtfmateriaNombre.setText(materia.getNombre());
                 materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
                 jrActivo.setSelected(materia.isEstado());
-            } else if (!jtfmateriaNombre.getText().equals("")) {
-                Materia materia = mat.buscarCualquierMateria(jtfmateriaNombre.getText());
-                jtfCodigo.setText(String.valueOf(materia.getIdMateria()));
-                materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
-                jrActivo.setSelected(materia.isEstado());
+            } catch (Exception ex) {
+                try {
+                    Materia materia = mat.buscarCualquierMateria(jtfmateriaNombre.getText());
+                    jtfCodigo.setText(String.valueOf(materia.getIdMateria()));
+                    materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
+                    jrActivo.setSelected(materia.isEstado());
+                } catch (Exception e) {
+                    e.getCause();
+                }
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getCause());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
