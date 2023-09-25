@@ -19,7 +19,12 @@ import universidad.entidades.Materia;
  */
 public class alumnosXMateria extends javax.swing.JPanel {
 
-    private DefaultTableModel modelo;
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+        };
     private MateriaData md = new MateriaData();
     private InscripcionData iD = new InscripcionData();
 
@@ -27,12 +32,6 @@ public class alumnosXMateria extends javax.swing.JPanel {
         initComponents();
         armarCabecera();
         cargarCombo();
-        modelo = new DefaultTableModel() {
-        @Override
-        public boolean isCellEditable(int fila, int columna) {
-            return false;
-        }
-        };
     }
 
     /**
@@ -155,6 +154,7 @@ public class alumnosXMateria extends javax.swing.JPanel {
 
     private void jComboMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboMateriasActionPerformed
         try {
+            
             borrarFilas();
             Materia materia = (Materia) jComboMaterias.getSelectedItem();
 
