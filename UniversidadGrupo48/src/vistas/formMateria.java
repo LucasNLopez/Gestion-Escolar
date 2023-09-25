@@ -238,24 +238,20 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfCodigoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!jtfCodigo.getText().equals("")) {
-            try {
+        try {
+            if (!jtfCodigo.getText().equals("")) {
                 Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
                 jtfmateriaNombre.setText(materia.getNombre());
                 materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
                 jrActivo.setSelected(materia.isEstado());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            }
-        } else if (!jtfmateriaNombre.getText().equals("")) {
-            try {
+            } else if (!jtfmateriaNombre.getText().equals("")) {
                 Materia materia = mat.buscarCualquierMateria(jtfmateriaNombre.getText());
                 jtfCodigo.setText(String.valueOf(materia.getIdMateria()));
                 materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
                 jrActivo.setSelected(materia.isEstado());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getCause());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
