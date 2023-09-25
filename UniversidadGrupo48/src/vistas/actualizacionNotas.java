@@ -12,7 +12,6 @@ import universidad.accesoADatos.AlumnoData;
 import universidad.accesoADatos.InscripcionData;
 import universidad.entidades.Alumno;
 import universidad.entidades.Inscripcion;
-import universidad.entidades.Materia;
 
 /**
  *
@@ -23,7 +22,7 @@ public class actualizacionNotas extends javax.swing.JPanel {
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int fila, int columna) {
-            if(columna==2){
+            if(columna==3){
                 return true;
             }
             return false;
@@ -92,7 +91,12 @@ public class actualizacionNotas extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(TablaNotas);
 
-        jButton6.setText("Guardar");
+        jButton6.setText("Modificar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Salir");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -165,8 +169,12 @@ public class actualizacionNotas extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        if(TablaNotas.contains(0, 0)){
+        borrarFilas();
+        }
         try {
-            borrarFilas();
+            
+            
             Alumno alumno = (Alumno) jComboBox1.getSelectedItem();
 
             List<Inscripcion> listaInscripciones = iData.obtenerInscripcionesPorAlumno(alumno.getIdAlumno());
@@ -175,9 +183,13 @@ public class actualizacionNotas extends javax.swing.JPanel {
                 cargarDatos(i);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

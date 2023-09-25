@@ -86,7 +86,7 @@ public class InscripcionData {
                 inscripcion=new Inscripcion();
                 inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
                 inscripcion.setNota(rs.getInt("nota"));
-                inscripcion.setAlumno(ad.buscarAlumno(rs.getInt("idAlumno")));
+                inscripcion.setAlumno(ad.buscarAlumno(id));
                 inscripcion.setMateria(md.buscarMateria(rs.getInt("idMateria")));
                 inscripciones.add(inscripcion);
             }
