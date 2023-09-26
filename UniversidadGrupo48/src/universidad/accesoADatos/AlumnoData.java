@@ -38,6 +38,7 @@ public class AlumnoData {
            if(rs.next()){
                alumno.setIdAlumno(rs.getInt(1));
                JOptionPane.showMessageDialog(null, "Alumno Guardado.");
+               //null seria la ventanda de donde surge el mensaje
            }
            ps.close();
            

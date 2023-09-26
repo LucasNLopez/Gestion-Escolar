@@ -165,6 +165,7 @@ public class actualizacionNotas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        //Para poder hacer esto, tuvimos que trasformar a jpEscritorio en publico y static
         Principal.jpEscritorio.removeAll();
         Principal.jpEscritorio.repaint();
     }//GEN-LAST:event_jButton7ActionPerformed
