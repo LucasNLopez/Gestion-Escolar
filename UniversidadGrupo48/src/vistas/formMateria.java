@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
 import javax.swing.JOptionPane;
@@ -222,22 +218,11 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jtfCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoActionPerformed
-//        if (jtfCodigo.getText().equals("")) {
-//            JOptionPane.showMessageDialog(this, "Debe ingresar el código de la materia");
-//        } else {
-//            try {
-//                Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
-//                jtfmateriaNombre.setText(materia.getNombre());
-//                materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
-//            } catch (Exception ex) {
-//                JOptionPane.showMessageDialog(null, ex.fillInStackTrace());
-//            }
-//
-//        }
 
     }//GEN-LAST:event_jtfCodigoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //este metodo intenta buscar una materia primero por su código y luego por su nombre si no se encuentra por código.
         if (jtfCodigo.getText().equals("") && (jtfmateriaNombre.getText().equals(""))) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un codigo o un nombre de la materia");;
         } else {
@@ -269,14 +254,12 @@ public class formMateria extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
         try {
-
             Materia materia = new Materia(jtfmateriaNombre.getText(), Integer.parseInt(materiaAnio.getText()), jrActivo.isSelected());
             mat.guardarMateria(materia);
             jtfCodigo.setText("");
             jtfmateriaNombre.setText("");
             materiaAnio.setText("");
             jrActivo.setSelected(false);
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
         }
