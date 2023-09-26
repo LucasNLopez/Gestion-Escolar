@@ -15,7 +15,7 @@ import universidad.entidades.Materia;
 
 /**
  *
- * @author Matias
+ * @author 3N3M
  */
 public class alumnosXMateria extends javax.swing.JPanel {
 
