@@ -40,6 +40,7 @@ public class formInscripciones extends javax.swing.JPanel {
         jrbInscriptas.setSelected(true);
         jrbNoInscriptas.setSelected(false);
         cargarDatosInscriptas();
+        jButtonAnular.setEnabled(true);
     }
 
     /**
