@@ -37,6 +37,9 @@ public class formInscripciones extends javax.swing.JPanel {
         initComponents();
         cargarCombo();
         armarCabecera();
+        jrbInscriptas.setSelected(true);
+        jrbNoInscriptas.setSelected(false);
+        cargarDatosInscriptas();
     }
 
     /**
@@ -243,9 +246,11 @@ public class formInscripciones extends javax.swing.JPanel {
             Inscripcion i=new Inscripcion(a,m,0);
             iD.guardarInscripcion(i);
             borrarFilas();
+            cargarDatosNoInscriptas();
         }else{
             JOptionPane.showMessageDialog(null, "Debe seleccionar una materia.");
         } 
+        
     }//GEN-LAST:event_jButtonInscribirActionPerformed
 
     private void jButtonAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularActionPerformed
@@ -257,6 +262,7 @@ public class formInscripciones extends javax.swing.JPanel {
             
             iD.borrarInscripcionMateriaAlumno(a.getIdAlumno(), idMateria);
             borrarFilas();
+            cargarDatosInscriptas();
         }else{
             JOptionPane.showMessageDialog(null, "Debe seleccionar una materia.");
         }

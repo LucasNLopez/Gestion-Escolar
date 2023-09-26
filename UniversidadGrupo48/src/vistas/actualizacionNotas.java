@@ -37,7 +37,8 @@ public class actualizacionNotas extends javax.swing.JPanel {
         iData = new InscripcionData();
         cargarCombo();
         armarCabecera();
-
+        borrarFilas();
+        cargarTabla();
     }
 
     /**
@@ -190,15 +191,15 @@ public class actualizacionNotas extends javax.swing.JPanel {
         int filaSeleccionada = TablaNotas.getSelectedRow();
         if (filaSeleccionada != -1) {
             Alumno a = (Alumno) jComboBox1.getSelectedItem();
-            
+
             int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
-            
-            String notaStr=(String) modelo.getValueAt(filaSeleccionada, 3);
+
+            String notaStr = (String) modelo.getValueAt(filaSeleccionada, 3);
             int nota = Integer.valueOf(notaStr);
-            if(nota>=0 && nota<=10){
+            if (nota >= 0 && nota <= 10) {
                 iData.actualizarNota(a.getIdAlumno(), idMateria, nota);
                 borrarFilas();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Debe ingresar nota valida");
             }
         }
@@ -243,6 +244,16 @@ public class actualizacionNotas extends javax.swing.JPanel {
 
         for (int i = filas; i >= 0; i--) {
             modelo.removeRow(i);
+        }
+    }
+
+    private void cargarTabla() {
+        Alumno alumno = (Alumno) jComboBox1.getSelectedItem();
+
+        List<Inscripcion> listaInscripciones = iData.obtenerInscripcionesPorAlumno(alumno.getIdAlumno());
+
+        for (Inscripcion i : listaInscripciones) {
+            cargarDatos(i);
         }
     }
 }
