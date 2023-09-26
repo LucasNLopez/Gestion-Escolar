@@ -16,15 +16,14 @@ import javax.swing.SwingUtilities;
  */
 public class Principal extends javax.swing.JFrame {
 
-    
     formAlumnos falumnos;
     formMateria fmateria;
     formInscripciones finscrip;
     actualizacionNotas anotas;
     alumnosXMateria aluXmat;
-    
+
     CardLayout vista;
-    
+
     public Principal() {
         initComponents();
         cargarIcono();
@@ -32,12 +31,21 @@ public class Principal extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         vista = (CardLayout) jpEscritorio.getLayout();
     }
-    
-    public void cargarIcono(){
+
+// Este método se encarga de cargar un icono para la ventana principal de la aplicación.
+    public void cargarIcono() {
+        // Primero, se obtiene la URL del recurso del icono utilizando la clase getClass().
+        // Esto asume que el archivo "universidad.png" está ubicado en el mismo paquete del código fuente.
+        // Si el icono está en un directorio diferente, se debe ajustar la ruta en getResource().
         URL url = getClass().getResource("/imagenes/universidad.png");
-        ImageIcon icono=new ImageIcon(url);
+
+        // A continuación, se crea un objeto ImageIcon a partir de la URL obtenida.
+        ImageIcon icono = new ImageIcon(url);
+
+        // Finalmente, se establece el icono de la ventana principal con la imagen del ImageIcon.
         setIconImage(icono.getImage());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -239,8 +247,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jpEscritorio.removeAll();
-        falumnos=new formAlumnos();
-        jpEscritorio.add(falumnos,"alumnos");
+        falumnos = new formAlumnos();
+        jpEscritorio.add(falumnos, "alumnos");
         vista.show(jpEscritorio, "alunnos");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
@@ -248,8 +256,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jpEscritorio.removeAll();
-        fmateria=new formMateria();
-        jpEscritorio.add(fmateria,"materias");
+        fmateria = new formMateria();
+        jpEscritorio.add(fmateria, "materias");
         vista.show(jpEscritorio, "materias");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
@@ -257,8 +265,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jpEscritorio.removeAll();
-        finscrip=new formInscripciones();
-        jpEscritorio.add(finscrip,"inscripcion");
+        finscrip = new formInscripciones();
+        jpEscritorio.add(finscrip, "inscripcion");
         vista.show(jpEscritorio, "inscripcion");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
@@ -266,8 +274,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jpEscritorio.removeAll();
-        anotas=new actualizacionNotas();
-        jpEscritorio.add(anotas,"notas");
+        anotas = new actualizacionNotas();
+        jpEscritorio.add(anotas, "notas");
         vista.show(jpEscritorio, "notas");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
@@ -275,8 +283,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         jpEscritorio.removeAll();
-        aluXmat=new alumnosXMateria();
-        jpEscritorio.add(aluXmat,"aluxmat");
+        aluXmat = new alumnosXMateria();
+        jpEscritorio.add(aluXmat, "aluxmat");
         vista.show(jpEscritorio, "aluxmat");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
