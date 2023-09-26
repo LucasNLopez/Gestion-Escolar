@@ -16,7 +16,7 @@ import universidad.entidades.Materia;
 
 /**
  *
- * @author Matias
+ * @author 3N3M
  */
 public class formInscripciones extends javax.swing.JPanel {
 

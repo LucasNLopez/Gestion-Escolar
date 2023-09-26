@@ -15,7 +15,7 @@ import universidad.entidades.Inscripcion;
 
 /**
  *
- * @author Matias
+ * @author 3N3M
  */
 public class actualizacionNotas extends javax.swing.JPanel {
 

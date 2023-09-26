@@ -13,7 +13,7 @@ import universidad.entidades.Alumno;
 
 /**
  *
- * @author Matias
+ * @author 3N3M
  */
 public class formAlumnos extends javax.swing.JPanel {
 
