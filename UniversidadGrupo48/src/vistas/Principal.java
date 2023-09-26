@@ -246,11 +246,23 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Elimina todos los componentes contenidos en jpEscritorio, que parece ser un contenedor Swing.
         jpEscritorio.removeAll();
+
+        // Crea una nueva instancia de la clase "formAlumnos" llamada "falumnos".
         falumnos = new formAlumnos();
+
+        // Agrega la instancia "falumnos" al contenedor "jpEscritorio" con un nombre "alumnos".
         jpEscritorio.add(falumnos, "alumnos");
+
+        // Utiliza un objeto "vista" (que no se muestra en el código proporcionado) para mostrar el contenido
+        // del contenedor "jpEscritorio" con el nombre "alunnos". Puede ser un objeto CardLayout u otro similar.
         vista.show(jpEscritorio, "alunnos");
+
+        // Actualiza la apariencia de todos los componentes en esta ventana y sus subcomponentes.
         SwingUtilities.updateComponentTreeUI(this);
+
+        // Repinta la ventana actual para mostrar los cambios realizados.
         this.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
