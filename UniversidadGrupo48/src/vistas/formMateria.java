@@ -221,16 +221,16 @@ public class formMateria extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfCodigoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //este metodo intenta buscar una materia primero por su código y luego por su nombre si no se encuentra por código.
         String codigo = jtfCodigo.getText().trim();
         String nombre = jtfmateriaNombre.getText().trim();
         try {
+            //si el campo codigo no esta vacio y coincide con que es numerico , busca la materia con el metodo buscarMateria(int codigo).
             if (!codigo.isEmpty() && codigo.matches("\\d+")) {
                 Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
                 jtfmateriaNombre.setText(materia.getNombre());
                 materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
                 jrActivo.setSelected(materia.isEstado());
-
+                //si el campo nombreMateria no esta vacio y coincide con que son letras aAzZ , busca la materia con el metodo buscarCualquierMateria(String nombre).
             } else if (!nombre.isEmpty() && nombre.matches("[a-zA-Z]+")) {
                 Materia materia = mat.buscarCualquierMateria(jtfmateriaNombre.getText());
                 jtfCodigo.setText(String.valueOf(materia.getIdMateria()));
@@ -238,33 +238,8 @@ public class formMateria extends javax.swing.JPanel {
                 jrActivo.setSelected(materia.isEstado());
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,("Debe ingresar un codigo o nombre válido."));
+            JOptionPane.showMessageDialog(null, ("Debe ingresar un codigo o nombre válido."));
         }
-
-//        
-//        if (jtfCodigo.getText().equals("") && (jtfmateriaNombre.getText().equals(""))) {
-//            JOptionPane.showMessageDialog(this, "Debe ingresar un codigo o un nombre de la materia");;
-//        } else {
-//            try {
-//                if(!codigo.matches("\\d+")){
-//                Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
-//                jtfmateriaNombre.setText(materia.getNombre());
-//                materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
-//                jrActivo.setSelected(materia.isEstado());
-//                }
-//            } catch (NumberFormatException ex) {
-//                jtfCodigo.setText("");
-//                JOptionPane.showMessageDialog(null, "El Codigo debe ser un número válido.");
-////                try {
-//                    Materia materia = mat.buscarCualquierMateria(jtfmateriaNombre.getText());
-//                    jtfCodigo.setText(String.valueOf(materia.getIdMateria()));
-//                    materiaAnio.setText(String.valueOf(materia.getAnioMateria()));
-//                    jrActivo.setSelected(materia.isEstado());
-//                } catch (Exception e) {
-//                    e.getCause();
-////                }
-//            }
-//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
