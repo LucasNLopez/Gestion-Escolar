@@ -50,7 +50,7 @@ public class InscripcionData {
     }
     
     public List<Inscripcion> obtenerInscripciones(){
-        String sql="SELECT * FROM incripcion";
+        String sql="SELECT * FROM inscripcion";
         
         List<Inscripcion> listaincripcion=new ArrayList<>();
         

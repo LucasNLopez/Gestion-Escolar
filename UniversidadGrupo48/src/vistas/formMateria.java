@@ -1,7 +1,10 @@
 package vistas;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import universidad.accesoADatos.InscripcionData;
 import universidad.accesoADatos.MateriaData;
+import universidad.entidades.Inscripcion;
 import universidad.entidades.Materia;
 
 /**
@@ -15,7 +18,8 @@ public class formMateria extends javax.swing.JPanel {
      */
     MateriaData mat = new MateriaData();
     Materia mat1 = new Materia();
-
+    InscripcionData iD = new InscripcionData();
+    
     public formMateria() {
         initComponents();
     }
@@ -283,6 +287,16 @@ public class formMateria extends javax.swing.JPanel {
         try {
             Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
             if (materia.isEstado()) {
+                //Se crea una lista con todas las inscripciones, luego si la lista no esta vacia verifica si hay inscripciones con la misma materia que vamos a eliminar,
+                //si encientra alguna inscripcion con la materia que vamos a eliminar tambien la elimina.
+                List<Inscripcion> listaInscripciones=iD.obtenerInscripciones();
+                if(!listaInscripciones.isEmpty()){
+                    for(Inscripcion i:listaInscripciones){
+                        if(i.getMateria().getIdMateria()==materia.getIdMateria()){
+                           iD.borrarInscripcionMateriaAlumno(i.getAlumno().getIdAlumno(), i.getMateria().getIdMateria()); 
+                        }
+                    }
+                }
                 mat.eliminarMateria(materia.getIdMateria());
             } else {
                 JOptionPane.showMessageDialog(this, "Materia inactiva");

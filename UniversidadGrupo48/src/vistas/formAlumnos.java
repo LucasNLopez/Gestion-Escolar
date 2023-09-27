@@ -7,9 +7,12 @@ package vistas;
 
 import java.sql.Date;
 import java.time.ZoneId;
+import java.util.List;
 import javax.swing.JOptionPane;
 import universidad.accesoADatos.AlumnoData;
+import universidad.accesoADatos.InscripcionData;
 import universidad.entidades.Alumno;
+import universidad.entidades.Inscripcion;
 
 /**
  *
@@ -21,7 +24,8 @@ public class formAlumnos extends javax.swing.JPanel {
      * Creates new form formAlumnos
      */
     AlumnoData ad = new AlumnoData();
-
+    InscripcionData iD = new InscripcionData();
+    
     public formAlumnos() {
         initComponents();
     }
@@ -293,6 +297,13 @@ public class formAlumnos extends javax.swing.JPanel {
         try {
             Alumno alumno = ad.buscarAlumnoPorDni(Integer.valueOf(textDni.getText()));
             if (alumno.isEstado()) {
+                //comprobamos si tiene inscripciones y las eliminamos junto con el alumno.
+                List<Inscripcion> listaInsc=iD.obtenerInscripcionesPorAlumno(alumno.getIdAlumno());
+                if(!listaInsc.isEmpty()){
+                    for(Inscripcion i:listaInsc){
+                        iD.borrarInscripcionMateriaAlumno(i.getAlumno().getIdAlumno(), i.getMateria().getIdMateria());
+                    }
+                }
                 ad.eliminarAlumno(alumno.getIdAlumno());
             } else {
                 JOptionPane.showMessageDialog(null, "Ese alumno ya estaba dado de baja.");
