@@ -288,7 +288,7 @@ public class formMateria extends javax.swing.JPanel {
             Materia materia = mat.buscarMateria(Integer.valueOf(jtfCodigo.getText()));
             if (materia.isEstado()) {
                 //Se crea una lista con todas las inscripciones, luego si la lista no esta vacia verifica si hay inscripciones con la misma materia que vamos a eliminar,
-                //si encientra alguna inscripcion con la materia que vamos a eliminar tambien la elimina.
+                //si encuentra alguna inscripcion con la materia que vamos a eliminar tambien la elimina.
                 List<Inscripcion> listaInscripciones=iD.obtenerInscripciones();
                 if(!listaInscripciones.isEmpty()){
                     for(Inscripcion i:listaInscripciones){
